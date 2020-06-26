@@ -36,33 +36,88 @@ void reverse_array(int arr[], int n)
 	}
 }
 
+void enter_mass(int* array, int count)
+{
+	for (int i = 0; i < count; i++)
+	{
+		cout << "Введите число: \n";
+		cin >> array[i];
+	}
+}
+
+void show_mass(int* array, int count)
+{
+	for (int i = 0; i < count; i++)
+	{
+		cout << array[i] << " ";
+	}
+	cout << "\n";
+}
+
+double average(int* array, int count)
+{
+	double sum = 0;
+	for (int i = 0; i < count; i++)
+	{
+		sum += array[i];
+	}
+	return sum / count;
+}
+
+int* add_element(int* array, int count)
+{
+	int* dest = new int[count + 1];
+	for (int i = 0; i < count; i++)
+	{
+		dest[i] = array[i];
+	}
+	dest[count] = average(array, count);
+	delete[] array;
+	return dest;
+}
+
 int main()
 {
 	setlocale(LC_ALL, "russian");
-
 	cout << "Выполнил Котов А.А. УМЛ-112\n";
 	cout << "Программа для работы с массивом\n";
 
-	int arr[] = {101, 121, 622, 332, 444};
-	int size = sizeof(arr) / sizeof(int);
+	int size = 5;
+	int* arr = new int[size]{101, 121, 622, 332, 444};
 
 	cout << "Исходный массив: \n";
-	for (int i = 0; i < size; i++)
-	{
-		cout << arr[i] << " ";
-	}
-	cout << "\n";
-	
+	show_mass(arr, size);
+
 	analyze_array(arr, size);
 
 	cout << "Обратный массив: \n";
 	reverse_array(arr, size);
 
-	for (int i = 0; i < size; i++)
-	{
-		cout << arr[i] << " ";
-	}
-	cout << "\n";
+	show_mass(arr, size);
+
+	cout << "Введите новый размер массива: ";
+	arr = new int[size];
+	cin >> size;
+
+	enter_mass(arr, size);
+
+	cout << "Элементы введенного массива\n";
+
+	show_mass(arr, size);
+
+	cout << "Среднее арифметическое массива равно\n";
+
+	cout << average(arr, size) << "\n";
+
+	arr = add_element(arr, size);
+
+	size++;
+
+	cout << "Массив с добавленным элементом\n";
+
+	show_mass(arr, size);
+
+	delete[] arr;
 
 	system("pause");
 }
