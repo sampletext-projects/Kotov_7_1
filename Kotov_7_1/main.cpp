@@ -96,8 +96,8 @@ int main()
 	show_mass(arr, size);
 
 	cout << "Введите новый размер массива: ";
-	arr = new int[size];
 	cin >> size;
+	arr = new int[size];
 
 	enter_mass(arr, size);
 
